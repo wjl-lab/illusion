@@ -4,7 +4,7 @@
 #include <math.h>
 /********** 定义全局变量 **********/
 #define WIDTH 1000
-#define LENGTH 1000
+#define LENGTH 800
 #define PI 3.1415926
 /********** 绘制中间的圆 **********/
 void originCircle(double x, double y, double r)
@@ -30,12 +30,12 @@ int main(void)
 	initgraph(WIDTH, LENGTH);
 	int drawMode = 1;
 	double x[7], y[7], r[7];//7个小圆的坐标半径
-	x[0] = 250, y[0] = 200, r[0] = 35;//中间小圆的原始坐标半径
-	double speedX = 7.5, speedY = 6;//小圆的移动速度
-	double ratio = 2.5;//大圆与小圆半径之比
-	double radius_change = 0.006;//半径比例的变化率
-	double dis_change = 0.35;//距离的变化率
-	double dis = 175;//初始大圆和小圆的距离
+	x[0] = 250, y[0] = 240, r[0] = 35;//中间小圆的原始坐标半径
+	double speedX = 3.0, speedY = 2.4;//小圆的移动速度
+	double ratio = 2.25;//大圆与小圆半径之比
+	double radius_change = 0.0015;//半径比例的变化率
+	double dis_change = 0.10;//距离的变化率
+	double dis = 165;//初始大圆和小圆的距离 
 	double angle[6];
 	angle[0] = PI / 12;//一个大圆数据
 	x[1] = dis * sin(angle[0]) + x[0];
@@ -64,8 +64,8 @@ int main(void)
 			{
 				cleardevice(); // 清屏
 				drawMode = drawMode + 1; // 进行下一种绘图模式
-				if (drawMode > 4) // 如果大于4，重新回到第1种绘图模式
-					drawMode = 1;
+				if (drawMode > 3) // 如果大于4，重新回到第1种绘图模式
+					drawMode -= 3;
 			}
 		}
 		if (drawMode == 1)//绘制七个圆一起移动
@@ -73,7 +73,6 @@ int main(void)
 			x[0] += speedX;
 			y[0] += speedY;
 			originCircle(x[0], y[0], r[0]);//绘制小圆
-			surroundCircle(x[1], y[1], r[1]);
 			x[1] = dis * sin(angle[0]) + x[0];
 			y[1] = dis * cos(-angle[0]) + y[0];
 			r[1] = ratio * r[0];
@@ -90,11 +89,11 @@ int main(void)
 			}
 			FlushBatchDraw();
 			Sleep(10);
-			if (x[0] > 750 || x[0] < 250)
+			if (x[0] > 800 || x[0] < 250)
 			{
 				speedX = -speedX;//小球速度反向
 				speedY = -speedY;
-				dis_change = -1 * dis_change;//
+				dis_change = -1 * dis_change;
 				radius_change = -1 * radius_change;
 			}
 		}
@@ -130,7 +129,6 @@ int main(void)
 			x[0] += speedX;
 			y[0] += speedY;
 			funnyMove(x[0], y[0], r[0]);
-			funnyMove(x[1], y[1], r[1]);
 			x[1] = dis * sin(angle[0]) + x[0];
 			y[1] = dis * cos(-angle[0]) + y[0];
 			r[1] = ratio * r[0];
