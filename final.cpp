@@ -33,9 +33,9 @@ int main(void)
 	x[0] = 250, y[0] = 240, r[0] = 35;//中间小圆的原始坐标半径
 	double speedX = 3.0, speedY = 2.4;//小圆的移动速度
 	double ratio = 2.25;//大圆与小圆半径之比
-	double radius_change = 0.0015;//半径比例的变化率
+	double radius_change = 0.0018;//半径比例的变化率
 	double dis_change = 0.10;//距离的变化率
-	double dis = 165;//初始大圆和小圆的距离 
+	double dis = 163;//初始大圆和小圆的距离 
 	double angle[6];
 	angle[0] = PI / 12;//一个大圆数据
 	x[1] = dis * sin(angle[0]) + x[0];
@@ -144,7 +144,7 @@ int main(void)
 				dis = dis - dis_change;
 			}
 			FlushBatchDraw();
-			Sleep(10);
+			Sleep(5);
 			if (x[0] > 750 || x[0] < 250)
 			{
 				speedX = -speedX;//小球速度反向
